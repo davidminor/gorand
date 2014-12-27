@@ -23,10 +23,10 @@ func NewPcg64(seed Uint128) *Pcg64 {
 }
 
 // create a new PCG with the given seed and stream
-func NewPcg64Stream(state, stream Uint128) *Pcg64 {
+func NewPcg64Stream(seed, stream Uint128) *Pcg64 {
   rng := &Pcg64{}
   rng.Stream(stream)
-  rng.Seed(state)
+  rng.Seed(seed)
   return rng
 }
 
