@@ -70,7 +70,7 @@ func (rng *Pcg64) Uint64n(bounds uint64) uint64 {
   for {
     result := rng.Uint64()
     if result >= threshold {
-      return result;
+      return result % bounds;
     }
   }
 }
