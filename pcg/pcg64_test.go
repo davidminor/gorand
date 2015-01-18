@@ -7,23 +7,22 @@ package pcg
 import (
   "testing"
   "math/rand"
-  . "github.com/davidminor/uint128"
 )
 
 func TestPcg64(t *testing.T) {
-  rng := NewPcg64Stream(Uint128{0,uint64(42)}, Uint128{0,uint64(54)})
+  rng := NewPcg64Stream(0, 42, 0, 54)
   for i := 0; i < 5; i++ {
-    rng.Uint64()
+    rng.Next()
   }
   
-  if next := rng.Uint64(); next != uint64(0x606121f8e3919196) {
-    t.Errorf("Got %x, was expecting %x", uint64(0x606121f8e3919196));
+  if next := rng.Next(); next != uint64(0x606121f8e3919196) {
+    t.Errorf("Got %x, was expecting %x", next, uint64(0x606121f8e3919196));
   }
 }
 
 func TestBounds(t *testing.T) {
-  rng := NewPcg64(Uint128{0,0})
-  test1 := rng.Uint64n(1)
+  rng := NewPcg64(0, 0)
+  test1 := rng.NextN(1)
   if test1 != 0 {
     t.Errorf("Bound of 1 did not give 0 (%x)", test1)
   }
@@ -33,7 +32,7 @@ func TestBounds(t *testing.T) {
     if rand.Uint32() % 2 == 1 {
       bounds |= (1 << 63)
     }
-    result := rng.Uint64n(bounds)
+    result := rng.NextN(bounds)
     if result >= bounds {
       t.Errorf("Got %x which is outside of bound %x", result, bounds)
     }
