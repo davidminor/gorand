@@ -26,7 +26,7 @@ func NewLcg64Stream(seed, stream uint64) *Lcg64 {
 }
 
 func (lcg *Lcg64) Int63() int64 {
-  return int64(lcg.Next()) >> 1
+  return int64(lcg.Next() >> 1)
 }
 
 func (lcg *Lcg64) Seed(s int64) {
