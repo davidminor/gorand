@@ -32,7 +32,7 @@ func NewLcg128Stream(seed, stream Uint128) *Lcg128 {
 
 func (lcg *Lcg128) Int63() int64 {
   n := lcg.Next()
-  return int64((n.H ^ n.L)) >> 1
+  return int64((n.H ^ n.L) >> 1)
 }
 
 func (lcg *Lcg128) Seed(s int64) {
